@@ -1,0 +1,46 @@
+FORMAT: 1A
+
+# Presentation
+This presentation API on Apiary its purpose is to assist in demonstrating an API documented on Apiary during a presentation on Apiary.
+
+# Group Notes
+Notes related resources of the **Notes API**
+
+## Slides Collection [/slides]
+### List all Slides [GET]
++ Response 200 (application/json)
+
+        [{
+          "id": 1, "title": "Jogging in park"
+        }, {
+          "id": 2, "title": "Pick-up posters from post-office"
+        }]
+
+### Create a Slide [POST]
++ Request (application/json)
+
+        { "title": "Buy cheese and bread for breakfast." }
+
++ Response 201 (application/json)
+
+        { "id": 3, "title": "Buy cheese and bread for breakfast." }
+
+## Note [/slides/{id}]
+A single Note object with all its details
+
++ Parameters
+    + id (required, number, `1`) ... Numeric `id` of the Slide to perform action with. Has example value.
+
+### Retrieve a Slide [GET]
++ Response 200 (application/json)
+
+    + Header
+
+            X-My-Header: The Value
+
+    + Body
+
+            { "id": 2, "title": "Pick-up posters from post-office" }
+
+### Remove a Slide [DELETE]
++ Response 204
