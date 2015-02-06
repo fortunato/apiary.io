@@ -3,6 +3,320 @@ FORMAT: 1A
 # Presentation
 This presentation API on Apiary its purpose is to assist in demonstrating an API documented on Apiary during a presentation on Apiary.
 
+# Group Dashboard
+Dashboard Collection
+
+## Dashboard Collection [/Dashboards]
+### List all Dashboards [GET]
+Returns an array of dashboards objects. Each dashboard object has a 'Widget' node containing an array of widgets.
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "Total": 2, 
+                "Results": [{
+                    "Id": "1dc128eb-f503-489e-9d0e-e5aae263c191", 
+                    "Name": "Australian IT Specialists",
+                    "IsDefault": true,
+                    "Widgets": [{
+                        "Id": "c730ede9-e9fc-4fe8-9a13-e70b0111e000",
+                        "SurveyId": "e92e736e-fb59-4e41-bafc-957fe470f086",
+                        "Type": "AHDC-87",
+                        "ViewFilteredBy": "annual-sales-revenue"
+                        }, {
+                        "Id": "9c144f5c-a4c7-4354-bab2-4c6886d2eb0a",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "Australian IT Specialists",
+                        "Type": "data-by-contributor-size",
+                        "ViewFilteredBy": "annual-sales-revenue"
+                    }, {
+                        "Id": "85013002-4548-41c6-9117-33420dea43bc",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "Australian IT Specialists",
+                        "Type": "salary-market-movements",
+                        "ViewFilteredBy": "job-family"
+                    }, {
+                        "Id": "bebd0f7e-b2d5-4621-a9ef-f4452123f6c8",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "Australian IT Specialists",
+                        "Type": "salary-market-movements",
+                        "ViewFilteredBy": "organisation-size"
+                    }, {
+                        "Id": "ed7b7b08-8c90-4d2c-9738-bae7593708be",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "Australian IT Specialists",
+                        "Type": "median-sos-market-movements",
+                        "ViewFilteredBy": "sos-movements"
+                    }, {
+                        "Id": "a8d27386-077c-4b99-a6b3-b39d3ddbfd7e",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "Australian IT Specialists",
+                        "Type": "same-incumbent-movements",
+                        "ViewFilteredBy": "job-family"
+                    },{
+                        "Id": "428bc26f-e8f1-4f63-b12f-80191e67277d",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "Australian IT Specialists",
+                        "Type": "same-incumbent-movements",
+                        "ViewFilteredBy": "organisation-size"
+                    },{
+                        "Id": "652ec994-16f8-4642-a347-287e8b8aebdd",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "Australian IT Specialists",
+                        "Type": "interstate-comparison",
+                        "ViewFilteredBy": "labour-market"
+                    }]
+                },{
+                    "Id": "9650e1b7-b2b8-46c3-9f0d-fa287c46f630",
+                    "Name": "AIIA",
+                    "IsDefault": false,
+                    "Widgets": [{
+                        "Id": "f9748d42-ce75-46a7-9b32-ece7c9fb0baa",
+                        "SurveyId": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                        "SurveyName": "AIIA",
+                        "Type": "salary-market-movements",
+                        "ViewFilteredBy": "job-family"
+                    }]
+                }]
+            }
+    
+    + Schema
+    
+            {
+                "type": "object",
+                "title": "Dashboard",
+                "properties": {
+                    "Total": {
+                        "type": "integer"
+                    },
+                    "Results": {
+                        "type": "array",
+                        "items": {
+                            "title": "Dashboard",
+                            "type": "object",
+                            "properties": {
+                                "Id": {
+                                    "type": "string"
+                                },
+                                "Name": {
+                                    "type": "string"
+                                },
+                                "Widgets": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Widget",
+                                        "type": "object",
+                                        "properties": {
+                                            "Id": {
+                                                "type": "string"
+                                            },
+                                            "Report": {
+                                                "type": "string"
+                                            },
+                                            "Type": {
+                                                "type": "string"
+                                            },
+                                            "ViewFilteredBy": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": ["Id", "Report", "Type", "By"]
+                                    }
+                                }
+                            },
+                            "required": ["Id", "Report", "Name", "Widgets"]
+                        }
+                    }
+                }
+            }
+
+### Create a Dashboard [POST]
+Create new dashboard (with widgets when 'Widget' array is not empty).
+@todo Document response in case of failed INSERT
++ Request (application/json)
+
+    + Body
+    
+            {
+                "Name": "Australian IT Specialists",
+                "Widgets": [{
+                    "Report": "6103395f-20b5-41fb-9650-03b0ca50cce5",
+                    "Type": "same-incumbent-movements",
+                    "ViewFilteredBy": "job-family"
+                },{
+                    "Report": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                    "Type": "same-incumbent-movements",
+                    "ViewFilteredBy": "organisation-size"
+                }]
+            }
+            
+    + Schema
+            
+            {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string"
+                    }, {
+                    "Widgets": [
+                        "type": "array"
+                        "items": {
+                            "type": "object",
+                            "title": "Widget",
+                            "properties": {
+                                "Report": {
+                                    "type": "string"
+                                },
+                                "Type": {
+                                    "type": "string"
+                                },
+                                "ViewFilteredBy": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": ["Name"]
+            }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "Id": "8169134f-ad61-4e0b-a7d8-d143541b6a94",
+                "Name": "Australian IT Specialists",
+                "Widgets": [{
+                    "Id": "a8d27386-077c-4b99-a6b3-b39d3ddbfd7e",
+                    "Report": "6103395f-20b5-41fb-9650-03b0ca50cce5",
+                    "Type": "same-incumbent-movements",
+                    "ViewFilteredBy": "job-family"
+                },{
+                    "Id": "428bc26f-e8f1-4f63-b12f-80191e67277d",
+                    "Report": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                    "Type": "same-incumbent-movements",
+                    "ViewFilteredBy": "organisation-size"
+                }]
+            }
+
+    + Schema
+    
+            {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string"
+                    }, {
+                    "Widgets": [
+                        "type": "array",
+                        "required": false,
+                        "items": {
+                            "type": "object",
+                            "title": "Widget",
+                            "properties": {
+                                "Id": {
+                                    "type": "string"
+                                },
+                                "Report": {
+                                    "type": "string"
+                                },
+                                "Type": {
+                                    "type": "string"
+                                },
+                                "By": {
+                                    "type": "string"
+                                }
+                            },
+                            "required": ["Id", "Report", "Name", "Widgets"]
+                        }
+                    }
+                },
+                "required": ["Id", "Name"]
+            }
+
+
+## Dashboard [/Dashboards/{Id}]
+### Update a dashboard [PUT]
++ Parameters
+    + Id (required, string, `8169134f-ad61-4e0b-a7d8-d143541b6a94`) ... UUID of the Dashboard to perform action with. Has example value.
+
++ Request (application/json)
+
+    + Body
+    
+            {
+                "Name": "Australian IT Specialists",
+                "Widgets": [{
+                    "Report": "6103395f-20b5-41fb-9650-03b0ca50cce5",
+                    "Type": "same-incumbent-movements",
+                    "ViewFilteredBy": "job-family"
+                },{
+                    "Report": "65c33eb6-df2a-4d68-a6e8-7130800ddcbf",
+                    "Type": "same-incumbent-movements",
+                    "ViewFilteredBy": "organisation-size"
+                }]
+            }
+            
+    + Schema
+            
+            {
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string"
+                    }, {
+                    "Widgets": [
+                        "type": "array"
+                        "items": {
+                            "type": "object",
+                            "title": "Widget",
+                            "properties": {
+                                "Report": {
+                                    "type": "string"
+                                },
+                                "Type": {
+                                    "type": "string"
+                                },
+                                "ViewFilteredBy": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": ["Name"]
+            }
+
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+            }
+
+### Delete a Dashboard [DELETE]
++ Parameters
+    + Id (required, string, `8169134f-ad61-4e0b-a7d8-d143541b6a94`) ... UUID of the Dashboard to perform action with. Has example value.
+
++ Response 204
+
++ Response 404 (application/json)
+
+    + Body
+    
+            {
+                "ResponseStatus": {
+                    "ErrorCode": "NotFound",
+                    "Message": "No dashboard was found by this Id"
+                }
+            }
+
+
+
 # Group Notes
 Notes related resources of the **Notes API**
 
