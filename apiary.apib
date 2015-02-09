@@ -153,15 +153,15 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
             }
             
     + Schema
-            
+
             {
                 "type": "object",
                 "properties": {
                     "Name": {
                         "type": "string"
                     },
-                    "Widgets": [
-                        "type": "array"
+                    "Widgets":{
+                        "type": "array",
                         "items": {
                             "type": "object",
                             "title": "Widget",
@@ -181,6 +181,7 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
                 },
                 "required": ["Name"]
             }
+
 
 + Response 200 (application/json)
 
