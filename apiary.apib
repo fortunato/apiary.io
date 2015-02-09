@@ -156,6 +156,7 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
 
             {
                 "type": "object",
+                "additionalProperties": false,
                 "properties": {
                     "Name": {
                         "type": "string"
@@ -165,6 +166,7 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
                         "items": {
                             "type": "object",
                             "title": "Widget",
+                            "additionalProperties": false,
                             "properties": {
                                 "Report": {
                                     "type": "string"
@@ -175,12 +177,10 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
                                 "ViewFilteredBy": {
                                     "type": "string"
                                 }
-                            },
-                            "required": ["Report", "Type", "ViewFilteredBy"]
+                            }
                         }
                     }
-                },
-                "required": ["Name"]
+                }
             }
 
 
@@ -231,12 +231,10 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
                                 "By": {
                                     "type": "string"
                                 }
-                            },
-                            "required": ["Id", "Report", "Name", "Widgets"]
+                            }
                         }
                     }
-                },
-                "required": ["Id", "Name"]
+                }
             }
 
 
