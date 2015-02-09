@@ -208,6 +208,7 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
     
             {
                 "type": "object",
+                "additionalProperties": false,
                 "properties": {
                     "Name": {
                         "type": "string"
@@ -215,6 +216,7 @@ Create new dashboard (with widgets when 'Widget' array is not empty).
                     "Widgets": {
                         "type": "array",
                         "required": false,
+                        "additionalProperties": false,
                         "items": {
                             "type": "object",
                             "title": "Widget",
